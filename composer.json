@@ -1,0 +1,28 @@
+{
+    "name": "lorenzo/redis",
+    "description": "CakePHP support for the Redis key-value database",
+    "type": "cakephp-plugin",
+    "require": {
+        "cakephp/datasource": "~3.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable",
+        "cakephp/log": "@stable",
+        "predis/predis": "^1.1"
+    },
+    "suggest": {
+        "cakephp/log": "Require this if you want to use the built-in command logger"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Lorenzo Rodriguez",
+            "email": "jose.zap@gmail.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"Cake\\Redis\\": "src"
+		}
+	}
+}
