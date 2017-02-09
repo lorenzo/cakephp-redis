@@ -67,7 +67,7 @@ $redis->set('cakephp', 'awesome');
 echo $redis->get('cakephp'); // Returns 'awesome'
 ```
 
-Make sure you take a look at all the commands you can run in the [PHPRedis Reame](https://github.com/phpredis/phpredis/blob/develop/README.markdown).
+Make sure you take a look at all the commands you can run in the [PHPRedis Readme](https://github.com/phpredis/phpredis/blob/develop/README.markdown).
 
 ## Executing a list of commands in a transaction
 
