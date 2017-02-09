@@ -7,7 +7,7 @@ use Cake\Redis\Driver\PredisDriver;
 use Cake\Datasource\ConnectionInterface;
 use Cake\Core\App;
 
-class RedisConnection implements ConnectionInterface
+class RedisConnection implements ConnectionInterface, DriverInterface
 {
     /**
      * The actual redis client to use for running commands
@@ -57,10 +57,10 @@ class RedisConnection implements ConnectionInterface
      *
      * If no params are passed it will return the current driver instance.
      *
-     * @param \Cake\Redis\Driver\PhpRedisDriver|\Cake\Redis\Driver\PredisDriver|string|null $driver The driver instance to use.
+     * @param \Cake\Redis\DriverInterface|string|null $driver The driver instance to use.
      * @param array $config Either config for a new driver or null.
      * @throws \Cake\Datasource\Exception\MissingDatasourceException When a driver class is missing.
-     * @return mixed
+     * @return \Cake\Redis\DriverInterface
      */
     public function driver($driver = null, $config = [])
     {

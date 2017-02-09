@@ -2,9 +2,11 @@
 
 namespace Cake\Redis\Driver;
 
+use Cake\Redis\DriverInterface;
+
 use Redis;
 
-class PHPRedisDriver extends Redis
+class PHPRedisDriver extends Redis implements DriverInterface
 {
     /**
      * Initializes the Redis client

@@ -2,9 +2,10 @@
 
 namespace Cake\Redis\Driver;
 
+use Cake\Redis\DriverInterface;
 use Predis\Client;
 
-class PredisDriver extends Client
+class PredisDriver extends Client implements DriverInterface
 {
 
     /**
