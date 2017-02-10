@@ -44,7 +44,7 @@ use Cake\Datasource\ConnectionManager;
 
 ConnectionManager::config('redis', [
     'className' => 'Cake\Redis\RedisConnection',
-    'driver' => 'Cake\Redis\Drier\PHPRedisDriver',
+    'driver' => 'Cake\Redis\Driver\PHPRedisDriver',
     'log' => false, // Log executed commands
     'host' => '127.0.0.1',
     'port' => 6379,
