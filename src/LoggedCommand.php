@@ -2,7 +2,9 @@
 
 namespace Cake\Redis;
 
-class LoggedCommand {
+use Cake\Database\Log\LoggedQuery;
+
+class LoggedCommand extends LoggedQuery {
 
     public $query;
 
