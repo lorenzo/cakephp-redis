@@ -11,7 +11,7 @@ for working with large lists, hashmaps and even pub-sub systems.
 This library assumes that you either have installed `phpredis` or `predis`. We recommend installing `phpredis`
 
 * [PhpRedis](https://github.com/phpredis/phpredis) (recommended)
-* [Predis](https://github.com/phpredis/phpredis)
+* [Predis](https://github.com/nrk/predis)
 
 ### Configuring it in in your app.php file in
 
