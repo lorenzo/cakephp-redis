@@ -72,4 +72,7 @@ class PHPRedisDriver extends Redis implements DriverInterface
             throw $e;
         }
     }
+    
+    public function setLogger() {}
+    public function getLogger() {}
 }
