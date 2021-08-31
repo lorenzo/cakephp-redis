@@ -44,7 +44,7 @@ class LoggedCommand extends LoggedQuery {
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return "duration={$this->took} rows={$this->numRows} {$this->query}";
     }
