@@ -137,6 +137,47 @@ class RedisConnection implements ConnectionInterface, DriverInterface
     /**
      * {@inheritDoc}
      */
+    public function getLogger($instance = null)
+    {
+        if ($instance === null) {
+            if ($this->_logger === null) {
+                $this->_logger = new RedisLogger();
+            }
+            return $this->_logger;
+        }
+        $this->_logger = $instance;
+        return $this->_logger;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isQueryLoggingEnabled()
+    {
+        return $this->_logQueries;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function enableQueryLogging()
+    {
+        $this->_logQueries = true;
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function disableQueryLogging()
+    {
+        $this->_logQueries = false;
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function transactional(callable $operation)
     {
         return $this->driver()->transactional($operation);
