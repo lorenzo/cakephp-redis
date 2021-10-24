@@ -8,6 +8,7 @@ use Cake\Redis\Driver\PredisDriver;
 use Cake\Datasource\ConnectionInterface;
 use Cake\Core\App;
 use \Cake\Datasource\Exception\MissingDatasourceException;
+use Cake\Database\Log\QueryLogger;
 
 class RedisConnection implements ConnectionInterface, DriverInterface
 {
@@ -79,7 +80,6 @@ class RedisConnection implements ConnectionInterface, DriverInterface
         }
 
         if (is_string($driver)) {
-
             if ($driver === 'phpredis') {
                 $driver = PHPRedisDriver::class;
             }
@@ -137,7 +137,7 @@ class RedisConnection implements ConnectionInterface, DriverInterface
     {
         if ($logger === null) {
             if ($this->_logger === null) {
-                $this->_logger = new RedisLogger();
+                $this->_logger = new QueryLogger(['connection' => $this->configName()]);
             }
         }
         $this->_logger = $logger;
@@ -148,10 +148,18 @@ class RedisConnection implements ConnectionInterface, DriverInterface
      */
     public function getLogger(): \Psr\Log\LoggerInterface
     {
-        if ($this->_logger === null) {
-            $this->_logger = new RedisLogger();
+        if ($this->_logger !== null) {
+            return $this->_logger;
         }
-        return $this->_logger;
+
+        if (!class_exists(QueryLogger::class)) {
+            throw new \RuntimeException(
+                'For logging you must either set a logger using Connection::setLogger()' .
+                ' or require the cakephp/log package in your composer config.'
+            );
+        }
+
+        return $this->_logger = new QueryLogger(['connection' => $this->configName()]);
     }
 
     /**
@@ -232,7 +240,7 @@ class RedisConnection implements ConnectionInterface, DriverInterface
                 $result = $callable(...$parameters);
 
                 $ellapsed = microtime(true) - $start;
-                $command->took = $ellapsed;
+                $command->took = (int)$ellapsed/1000;
                 $command->numRows = 1;
 
                 if ($result === false) {
@@ -243,7 +251,7 @@ class RedisConnection implements ConnectionInterface, DriverInterface
                     $command->numRows = count($result);
                 }
 
-                $this->getLogger()->log('debug', $command, []);
+                $this->getLogger()->debug((string)$command, ['query' => $command]);
 
                 return $result;
             };

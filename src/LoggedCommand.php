@@ -4,8 +4,8 @@ namespace Cake\Redis;
 
 use Cake\Database\Log\LoggedQuery;
 
-class LoggedCommand extends LoggedQuery {
-
+class LoggedCommand extends LoggedQuery
+{
     public $query;
 
     public $took = 0;
