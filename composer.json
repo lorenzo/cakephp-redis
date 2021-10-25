@@ -3,7 +3,8 @@
     "description": "CakePHP support for the Redis key-value database",
     "type": "cakephp-plugin",
     "require": {
-        "cakephp/datasource": "~3.3"
+        "cakephp/datasource": "4.2.x",
+        "cakephp/database": "4.2.x"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
@@ -20,9 +21,9 @@
             "email": "jose.zap@gmail.com"
         }
     ],
-	"autoload": {
-		"psr-4": {
-			"Cake\\Redis\\": "src"
-		}
-	}
+    "autoload": {
+        "psr-4": {
+            "Cake\\Redis\\": "src"
+        }
+    }
 }

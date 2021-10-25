@@ -4,8 +4,8 @@ namespace Cake\Redis;
 
 use Cake\Database\Log\LoggedQuery;
 
-class LoggedCommand extends LoggedQuery {
-
+class LoggedCommand extends LoggedQuery
+{
     public $query;
 
     public $took = 0;
@@ -44,7 +44,7 @@ class LoggedCommand extends LoggedQuery {
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return "duration={$this->took} rows={$this->numRows} {$this->query}";
     }

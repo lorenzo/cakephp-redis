@@ -9,7 +9,7 @@ class RedisConnectionTest extends TestCase
 
     protected $connection;
 
-    public function setUp()
+    public function setUp(): void
     {
         $config = [
             'host' => env('REDIS_HOST'),
@@ -49,25 +49,25 @@ class RedisConnectionTest extends TestCase
         $logger = $this->getMockBuilder(RedisLogger::class)
             ->setMethods(['log'])
             ->getMock();
-        $this->connection->logger($logger);
+        $this->connection->setlogger($logger);
 
         $logger->expects($this->at(0))
             ->method('log')
-            ->willReturnCallback(function ($command) {
+            ->willReturnCallback(function ($level,$command) {
                 $this->assertEquals($command->query, 'SET cake awesome');
                 $this->assertTrue($command->took > 0);
             });
 
         $logger->expects($this->at(1))
             ->method('log')
-            ->willReturnCallback(function ($command) {
+            ->willReturnCallback(function ($level,$command) {
                 $this->assertEquals($command->query, 'GET foo');
                 $this->assertTrue($command->took > 0);
             });
 
         $logger->expects($this->at(2))
             ->method('log')
-            ->willReturnCallback(function ($command) {
+            ->willReturnCallback(function ($level,$command) {
                 $this->assertEquals($command->query, 'MGET cake foo bar');
                 $this->assertTrue($command->took > 0);
                 $this->assertEquals($command->numRows, 3);
